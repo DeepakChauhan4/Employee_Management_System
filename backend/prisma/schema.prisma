@@ -1,0 +1,31 @@
+// schema.prisma
+
+generator client {
+  // MUST be prisma-client-js
+  provider = "prisma-client-js" 
+  
+  // REMOVED the custom output line so it goes to node_modules
+}
+
+datasource db {
+  provider = "postgresql"
+  // MUST have the url pointing to your .env file
+  url      = env("DATABASE_URL") 
+}
+
+model Role {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  users User[]
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  roleId    Int
+  role      Role     @relation(fields: [roleId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
