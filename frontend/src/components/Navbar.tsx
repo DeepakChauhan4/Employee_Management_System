@@ -1,18 +1,39 @@
-import { useAuth } from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
-    const auth = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("token"); //remove token- jwt from local storage
+        navigate("/"); //go to login
+    };
 
     return (
-        <div style={{ padding: "10px", background: "#222", color: "#fff" }}>
-            <span>Employee System</span>
+        <div style={navStyle}>
+            <h2>Company Dashboard</h2>
 
-            <button
-                style={{ float: "right" }}
-                onClick={auth?.logout}
-            >
+            <button style={logoutBtn} onClick={handleLogout}>
                 Logout
             </button>
         </div>
     );
 }
+
+const navStyle = {
+    height: "60px",
+    background: "#4f46e5",
+    color: "#fff",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "0 20px",
+};
+
+const logoutBtn = {
+    background: "#fff",
+    color: "#4f46e5",
+    border: "none",
+    padding: "8px 15px",
+    borderRadius: "6px",
+    cursor: "pointer",
+};

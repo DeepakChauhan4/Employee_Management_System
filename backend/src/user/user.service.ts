@@ -36,4 +36,32 @@ export class UserService {
             },
         });
     }
+    async getUserStats() {
+        const users = await this.prisma.user.findMany({
+            select: { createdAt: true },
+        });
+
+        const stats: Record<string, number> = {};
+
+        users.forEach((user) => {
+            const date = new Date(user.createdAt).toLocaleDateString();
+
+            stats[date] = (stats[date] || 0) + 1;
+        });
+
+        return Object.keys(stats).map((date) => ({
+            name: date,
+            users: stats[date],
+        }));
+    }
+
+    async updateProfileImage(userId: number, filename: string) {
+        return this.prisma.user.update({
+            where: { id: userId },
+            data: {
+                // @ts-ignore
+                profileImage: filename,
+            },
+        });
+    }
 }

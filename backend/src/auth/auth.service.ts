@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
@@ -14,7 +14,16 @@ export class AuthService {
   ) { }
 
   async register(dto: RegisterDto) {
+    const existingUser = await this.prisma.user.findUnique({
+      where: { email: dto.email },
+    });
+
+    if (existingUser) {
+      throw new Error("Email already exists");
+    }
+
     const hashed = await bcrypt.hash(dto.password, 10);
+
     return this.prisma.user.create({
       data: {
         name: dto.name,
@@ -25,24 +34,33 @@ export class AuthService {
     });
   }
 
-  async login(dto: LoginDto) {
+  async login(dto: any) {
     const user = await this.prisma.user.findUnique({
       where: { email: dto.email },
       include: { role: true },
     });
 
     if (!user) {
-      throw new UnauthorizedException('Invalid email or password');
+      throw new NotFoundException("User not found");
     }
 
     const isMatch = await bcrypt.compare(dto.password, user.password);
-    if (!isMatch) throw new Error('Invalid credentials');
+
+    if (!isMatch) {
+      throw new UnauthorizedException("Invalid credentials");
+    }
+
+    if (!user.role) {
+      throw new NotFoundException("Role not assigned");
+    }
+
+    const payload = {
+      userId: user.id,
+      role: user.role.name,
+    };
 
     return {
-      access_token: this.jwtService.sign({
-        userId: user.id,
-        role: user.role.name,
-      }),
+      access_token: this.jwtService.sign(payload),
     };
   }
 }
