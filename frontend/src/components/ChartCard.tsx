@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import {
@@ -15,8 +16,13 @@ export default function ChartCard() {
 
     useEffect(() => {
         const fetchStats = async () => {
-            const res = await api.get("/user/stats");
-            setData(res.data);
+            try {
+                const res = await api.get("/user/stats");
+                setData(Array.isArray(res.data) ? res.data : []);
+            } catch (_err) {
+                // silently fail and show empty chart placeholder
+                setData([]);
+            }
         };
 
         fetchStats();

@@ -4,14 +4,14 @@ import { api, setAuthToken } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import "../styles/login.css";
 
-// 🔥 If logo exists in assets
+//If logo exists in assets
 // import logo from "../assets/logo.png";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false); // 🔥 loader state
+    const [loading, setLoading] = useState(false); //loader state
 
     const navigate = useNavigate();
 
@@ -30,12 +30,12 @@ export default function Login() {
 
             console.log("API Response:", res.data);
 
-            // 🔥 Ensure token exists
+            //Ensure token exists
             if (!res.data.access_token) {
                 throw new Error("Token not received from server");
             }
 
-            // 🔥 Save token and set auth header for subsequent requests
+            //Save token and set auth header for subsequent requests
             const token = res.data.access_token;
             localStorage.setItem("token", token);
             setAuthToken(token);
@@ -70,7 +70,7 @@ export default function Login() {
 
                 {error && <p className="error">{error}</p>}
 
-                {/* 🔹 EMAIL */}
+                {/*EMAIL */}
                 <input
                     type="email"
                     placeholder="Email"
@@ -79,7 +79,7 @@ export default function Login() {
                     required
                 />
 
-                {/* 🔹 PASSWORD */}
+                {/*PASSWORD */}
                 <input
                     type="password"
                     placeholder="Password"
@@ -88,12 +88,12 @@ export default function Login() {
                     required
                 />
 
-                {/* 🔹 BUTTON */}
+                {/*BUTTON */}
                 <button type="submit" disabled={loading}>
                     {loading ? "Logging in..." : "Login"}
                 </button>
 
-                {/* 🔹 NAVIGATION */}
+                {/*NAVIGATION */}
                 <p style={{ marginTop: "10px" }}>
                     Don't have an account?{" "}
                     <span

@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/logo.png";
 
 export default function Navbar() {
     const navigate = useNavigate();
@@ -10,6 +11,7 @@ export default function Navbar() {
 
     return (
         <div style={navStyle}>
+            <img src={logo} alt="logo" style={{ width: 32, height: 32, borderRadius: 6 }} />
             <h2>Company Dashboard</h2>
 
             <button style={logoutBtn} onClick={handleLogout}>

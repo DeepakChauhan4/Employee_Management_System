@@ -24,12 +24,25 @@ export class AuthService {
 
     const hashed = await bcrypt.hash(dto.password, 10);
 
+    // handle optional department: find or create by name
+    let departmentId: number | undefined;
+    if (dto.department) {
+      const dep = await this.prisma.department.findUnique({ where: { name: dto.department } });
+      if (dep) {
+        departmentId = dep.id;
+      } else {
+        const created = await this.prisma.department.create({ data: { name: dto.department } });
+        departmentId = created.id;
+      }
+    }
+
     return this.prisma.user.create({
       data: {
         name: dto.name,
         email: dto.email,
         password: hashed,
         roleId: dto.roleId,
+        departmentId: departmentId || null,
       },
     });
   }

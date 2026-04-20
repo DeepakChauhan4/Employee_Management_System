@@ -2,7 +2,7 @@ const Loader = () => {
     return (
         <div style={containerStyle}>
             <div className="spinner"></div>
-            <p>Loading profile...⏳</p>
+            <p>Loading please wait...⏳</p>
         </div>
     );
 };

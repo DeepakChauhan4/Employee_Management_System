@@ -19,6 +19,13 @@ model Role {
   users User[]
 }
 
+model Department {
+  id    Int     @id @default(autoincrement())
+  name  String  @unique
+
+  users User[]
+}
+
 model User {
   id        Int      @id @default(autoincrement())
   name      String
@@ -29,4 +36,6 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
  profileImage String?
+ departmentId Int?
+  department   Department? @relation(fields: [departmentId], references: [id])
 }

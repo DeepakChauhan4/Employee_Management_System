@@ -6,6 +6,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import "./styles/loader.css";
 import Users from "./pages/Users";
 import Profile from "./pages/Profile";
+import UserView from "./pages/UserView";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/users" element={<Users />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/user/:id" element={<UserView />} />
 
         <Route
           path="/dashboard"

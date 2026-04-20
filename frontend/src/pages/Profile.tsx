@@ -18,7 +18,7 @@ export default function Profile() {
     useEffect(() => {
         const token = localStorage.getItem("token");
 
-        // 🔐 PROTECT ROUTE
+        //PROTECT ROUTE
         if (!token) {
             window.location.href = "/";
             return;
@@ -44,7 +44,7 @@ export default function Profile() {
 
     //HANDLE IMAGE UPLOAD
     const handleUpload = async () => {
-        console.log("UPLOAD CLICKED"); // 🔍 debug
+        console.log("UPLOAD CLICKED"); //debug
 
         if (!file) {
             alert("Please select a file first");
@@ -65,7 +65,7 @@ export default function Profile() {
 
             alert("Profile photo uploaded ✅");
 
-            await fetchProfile(); // 🔄 refresh profile
+            await fetchProfile(); //refresh profile
         } catch (err) {
             console.log("UPLOAD ERROR:", err);
         }
@@ -101,6 +101,9 @@ export default function Profile() {
                         {/* 🔹 Info */}
                         <h3 style={{ marginTop: "10px" }}>{me.name}</h3>
                         <p style={emailStyle}>{me.email}</p>
+                        {me.department?.name && (
+                            <p style={{ color: "#666", fontSize: "13px", marginTop: "4px" }}>{me.department.name}</p>
+                        )}
 
                         {/* 🔹 Role */}
                         <span
@@ -119,7 +122,7 @@ export default function Profile() {
                             {me.role.name}
                         </span>
 
-                        {/* 🔥 FILE INPUT */}
+                        {/* FILE INPUT */}
                         <input
                             type="file"
                             accept="image/*"
@@ -132,12 +135,12 @@ export default function Profile() {
                             }}
                             onChange={(e) => {
                                 const selected = e.target.files?.[0];
-                                console.log("SELECTED FILE:", selected); // 🔍 DEBUG
+                                console.log("SELECTED FILE:", selected);
                                 setFile(selected || null);
                             }}
                         />
 
-                        {/* 🔥 UPLOAD BUTTON */}
+                        {/*UPLOAD BUTTON */}
                         <button type="button" onClick={handleUpload} style={btnStyle}>
                             Upload Photo
                         </button>
@@ -201,6 +204,6 @@ const btnStyle = {
     background: "#1976d2",
     color: "#fff",
     cursor: "pointer",
-    position: "relative",
+    position: "relative" as const,
     zIndex: 10,
-};
+} as const;

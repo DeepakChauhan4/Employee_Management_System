@@ -11,6 +11,7 @@ export default function Register() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [roleId, setRoleId] = useState(2); // default EMPLOYEE
+    const [department, setDepartment] = useState("Engineering");
     const [error, setError] = useState("");
 
     const navigate = useNavigate();
@@ -24,6 +25,7 @@ export default function Register() {
                 email,
                 password,
                 roleId,
+                department,
             });
 
             //redirect to login after success
@@ -79,6 +81,21 @@ export default function Register() {
                 >
                     <option value={2}>Employee</option>
                     <option value={1}>Admin</option>
+                </select>
+
+                {/* DEPARTMENT */}
+                <select
+                    value={department}
+                    onChange={(e) => setDepartment(e.target.value)}
+                    style={{ marginTop: "8px" }}
+                    required
+                >
+                    <option value="Engineering">Engineering</option>
+                    <option value="Human Resources">Human Resources</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Sales">Sales</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Operations">Operations</option>
                 </select>
 
                 {/* BUTTON */}

@@ -11,10 +11,17 @@ export class UserService {
 
 
     async findById(id: number) {
+        console.log('findById called with id:', id);
+        if (id === undefined || id === null || Number.isNaN(Number(id))) {
+            console.error('findById received invalid id:', id);
+            throw new Error('Invalid id provided to findById');
+        }
+
         return this.prisma.user.findUnique({
-            where: { id },
+            where: { id: Number(id) },
             include: {
                 role: true, // include role details
+                department: true,
             },
         });
     }
@@ -22,7 +29,7 @@ export class UserService {
     findAll() {
         // @ts-ignore
         return this.prisma.user.findMany({
-            include: { role: true },
+            include: { role: true, department: true },
         });
     }
 
@@ -63,5 +70,16 @@ export class UserService {
                 profileImage: filename,
             },
         });
+    }
+
+    async update(userId: number, data: any) {
+        return this.prisma.user.update({
+            where: { id: userId },
+            data,
+        });
+    }
+
+    async remove(userId: number) {
+        return this.prisma.user.delete({ where: { id: userId } });
     }
 }
