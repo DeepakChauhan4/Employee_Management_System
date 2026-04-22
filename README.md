@@ -119,7 +119,7 @@ A full-stack Employee Management System built with modern technologies to manage
 
 ## 📸 Screenshots
 
-| Dashboard | Login | Register | Profile | Users |
+| Dashboard | Login | Register | Profile | Users | AdminDashboard | AdminUsers
 | --- | --- | --- | --- | --- |
 | ![Dashboard](./screenshots/admindashboard.png.png) | ![Login](./screenshots/login.png.png) | ![Register](./screenshots/register.png.png) | ![Profile](./screenshots/profileedit.png.png) | ![Users](./screenshots/adminusers.png.png) | ![AdminDashboard](./screenshots/admindashboard.png.png)|  ![AdminUsers](./screenshots/adminusers.png.png)
 
@@ -214,11 +214,3 @@ npm run preview       # Local production preview
 
 ✅ **Frontend**: Vercel (automatic from GitHub)
 ✅ **Backend**: Railway (with Railway CLI or dashboard
-
-This will complete the merge and push all your changes successfully!
-
-**Updated TODO.md** tracks progress.
-
-**Your repository is now ready for successful pushes!** 🚀
-
-**Task Complete.** 
