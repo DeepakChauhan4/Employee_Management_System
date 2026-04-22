@@ -68,7 +68,7 @@ A full-stack Employee Management System built with modern technologies to manage
 
 ### 🔹 Deployment
 - Frontend: Vercel
-- Backend: Railway
+- Backend: Render 
 
 ---
 
@@ -184,7 +184,7 @@ npm run dev
 
 **Backend (.env):**
 ```
-DATABASE_URL="postgresql://user:pass@host:port/db"
+DATABASE_URL="postgresql://neondb_owner:npg_XiMwY3TW2kre@ep-fancy-art-am0hyzto-pooler.c-5.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
 FRONTEND_URL="http://localhost:5173"(running on vite@latest default port then deployed it on vercel )
 ```
 
