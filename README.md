@@ -121,7 +121,8 @@ A full-stack Employee Management System built with modern technologies to manage
 
 | Dashboard | Login | Register | Profile | Users |
 | --- | --- | --- | --- | --- |
-| ![Dashboard](./screenshots/admindashboard.png.png) | ![Login](./screenshots/login.png.png) | ![Register](./screenshots/register.png.png) | ![Profile](./screenshots/profileedit.png.png) | ![Users](./screenshots/adminusers.png.png) |
+| ![Dashboard](./screenshots/admindashboard.png.png) | ![Login](./screenshots/login.png.png) | ![Register](./screenshots/register.png.png) | ![Profile](./screenshots/profileedit.png.png) | ![Users](./screenshots/adminusers.png.png) | ![AdminDashboard](./screenshots/admindashboard.png.png)|  ![AdminUsers](./screenshots/adminusers.png.png)
+
 
 ---
 
